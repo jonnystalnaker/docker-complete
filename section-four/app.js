@@ -41,7 +41,9 @@ app.post('/favorites', async (req, res) => {
 
   try {
     await favorite.save();
-    res.status(201).json({ message: 'Favorite saved!', favorite: favorite.toObject() });
+    res
+      .status(201)
+      .json({ message: 'Favorite saved!', favorite: favorite.toObject() });
   } catch (error) {
     res.status(500).json({ message: 'Something went wrong.' });
   }
@@ -65,10 +67,14 @@ app.get('/people', async (req, res) => {
   }
 });
 
-mongoose.connect('mongodb://172.17.0.2:27017/swfavorites', { useNewUrlParser: true }, (err) => {
-  if (err) {
-    console.log(err);
-  } else {
-    app.listen(3000);
+mongoose.connect(
+  'mongodb://mongodb:27017/swfavorites',
+  { useNewUrlParser: true },
+  (err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      app.listen(3000);
+    }
   }
-});
+);
